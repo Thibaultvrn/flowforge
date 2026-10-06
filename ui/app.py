@@ -1,5 +1,6 @@
 import html
 import math
+import os
 import sys
 from pathlib import Path
 
@@ -415,8 +416,37 @@ def render_flow_view(df: pd.DataFrame) -> None:
     )
 
 
+_CLOUD_SECRET_KEYS = ("OPENAI_API_KEY", "FLOWFORGE_OPENAI_MODEL")
+
+
+def _copy_streamlit_secrets_into_environ() -> None:
+    """Copy Streamlit Cloud secrets into the environment when those variables are unset.
+
+    An already defined environment variable is left unchanged. A missing secrets
+    file is ignored so local `.env` loading in the decision agent still works.
+    """
+    missing = [key for key in _CLOUD_SECRET_KEYS if not os.environ.get(key, "").strip()]
+    if not missing:
+        return
+    try:
+        secrets = st.secrets
+    except Exception:
+        return
+    for key in missing:
+        try:
+            raw = secrets[key]
+        except Exception:
+            continue
+        if raw is None:
+            continue
+        value = str(raw).strip()
+        if value and not os.environ.get(key, "").strip():
+            os.environ[key] = value
+
+
 def run_ai_action(label: str, action: str) -> dict:
     try:
+        _copy_streamlit_secrets_into_environ()
         from flowforge.agent import run_decision_action
 
         return {"label": label, "brief": run_decision_action(action)}

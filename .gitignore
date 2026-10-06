@@ -148,6 +148,7 @@ celerybeat-schedule
 # Environments
 .env
 .envrc
+.streamlit/secrets.toml
 .venv
 env/
 venv/
