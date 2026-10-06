@@ -1,9 +1,16 @@
 [theme]
-base = "dark"
-primaryColor = "#d97a2b"
-backgroundColor = "#0b0d10"
-secondaryBackgroundColor = "#12151a"
-textColor = "#d6dae0"
-borderColor = "#232830"
-baseRadius = "none"
-baseFontSize = 13
+base = "light"
+primaryColor = "#c2622d"
+backgroundColor = "#f5f6f8"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#1d2433"
+borderColor = "#e4e7eb"
+baseRadius = "0.5rem"
+baseFontSize = 14
+showWidgetBorder = true
+
+[theme.sidebar]
+backgroundColor = "#ffffff"
+
+[client]
+toolbarMode = "viewer"
