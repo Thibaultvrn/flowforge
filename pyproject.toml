@@ -1,0 +1,87 @@
+[build-system]
+requires = [
+    "setuptools",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+requires-python = ">=3.10"
+name = "flowforge"
+readme = "README.md"
+dynamic = [
+    "version",
+]
+dependencies = [
+    "ipython>=8.10",
+    "jupyterlab>=3.0",
+    "notebook",
+    "kedro~=1.7.0",
+    "streamlit",
+    "pydeck",
+    "python-dotenv",
+]
+
+[project.scripts]
+flowforge = "flowforge.__main__:main"
+
+[project.entry-points."kedro.hooks"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest-cov>=3,<7",
+    "pytest-mock>=1.7.1, <2.0",
+    "pytest~=7.2",
+    "ruff~=0.12.0",
+]
+
+[tool.setuptools.dynamic.version]
+attr = "flowforge.__version__"
+
+[tool.setuptools.packages.find]
+where = [
+    "src",
+]
+namespaces = false
+
+[tool.kedro]
+package_name = "flowforge"
+project_name = "FlowForge"
+kedro_init_version = "1.7.0"
+tools = "['Linting', 'Testing', 'Data Structure']"
+example_pipeline = "False"
+source_dir = "src"
+
+[tool.pytest.ini_options]
+addopts = "--cov-report term-missing --cov src/flowforge -ra"
+
+[tool.coverage.report]
+fail_under = 0
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+]
+
+[tool.ruff]
+line-length = 88
+show-fixes = true
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = [
+    "F",
+    "W",
+    "E",
+    "I",
+    "UP",
+    "PL",
+    "T201",
+]
+ignore = [
+    "E501",
+]
+
+[tool.kedro_telemetry]
+project_id = "97a9c8ef7803443dbe087ec201dc0c6e"

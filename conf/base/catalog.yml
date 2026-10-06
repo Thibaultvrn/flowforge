@@ -1,0 +1,70 @@
+# Here you can define all your datasets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/catalog-data/introduction/#data-catalog
+
+raw_orders:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/DataCoSupplyChainDataset.csv
+  load_args:
+    encoding: latin1
+
+inspected_orders:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/inspected_orders.parquet
+
+order_consistency_report:
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/order_consistency_report.csv
+  save_args:
+    index: false
+
+item_level_audit_report:
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/item_level_audit_report.csv
+  save_args:
+    index: false
+
+orders_primary:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/orders.parquet
+
+order_features:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/order_features.parquet
+
+train_orders:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/train_orders.parquet
+
+validation_orders:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/validation_orders.parquet
+
+test_orders:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/test_orders.parquet
+
+logistic_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/logistic_model.pkl
+
+validation_logistic_predictions:
+  type: pandas.ParquetDataset
+  filepath: data/07_model_output/validation_logistic_predictions.parquet
+
+logistic_validation_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/logistic_validation_metrics.json
+
+test_logistic_predictions:
+  type: pandas.ParquetDataset
+  filepath: data/07_model_output/test_logistic_predictions.parquet
+
+test_logistic_metrics:
+  type: json.JSONDataset
+  filepath: data/08_reporting/logistic_test_metrics.json
+
+operational_scored_orders:
+  type: pandas.ParquetDataset
+  filepath: data/07_model_output/operational_scored_orders.parquet
