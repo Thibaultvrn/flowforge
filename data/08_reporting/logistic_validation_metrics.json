@@ -1,0 +1,14 @@
+{
+  "roc_auc": 0.752514778427227,
+  "brier_score": 0.19598503483674556,
+  "accuracy": 0.6976579134137686,
+  "precision": 0.7929008567931457,
+  "recall": 0.6026046511627907,
+  "f1_score": 0.6847780126849894,
+  "threshold": 0.5,
+  "validation_prevalence": 0.5449660346750481,
+  "mean_predicted_probability": 0.5420481893608069,
+  "min_predicted_probability": 0.08413357710923736,
+  "median_predicted_probability": 0.4368449268300744,
+  "max_predicted_probability": 0.9898159912581572
+}
